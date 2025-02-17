@@ -63,7 +63,7 @@ This guide covers:
 
 1. **Clone the Repository**  
    ```bash
-   git clone https://github.com/cycloarcane/useful-scripts.git
+   git clone https://github.com/cycloarcane/guides-and-scripts.git
    ```
 
 2. **Browse the Topics**  
