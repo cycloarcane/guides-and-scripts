@@ -64,3 +64,34 @@ Use Cases:
 1. **Clone the Repository**  
    ```bash
    git clone https://github.com/cycloarcane/useful-scripts.git
+
+    ### Browse the Topics
+    Each script or guide is located in its own directory or file. Explore the repository to see what interests you.
+
+    ### Adapt & Implement
+    Feel free to take these scripts and guides as-is or customize them for your specific use case.
+
+    ### Contribute
+    If you notice anything that can be improved, have a suggestion, or want to add your own script, please see the Contributing section below.
+
+## Contributing
+
+    - Fork the repository on GitHub.
+    - Clone your fork to your local machine.
+    - Create a new branch for your changes.
+    - Commit your changes with clear commit messages.
+    - Push your changes to your fork.
+    - Open a Pull Request on this repository with a description of what you’ve changed or added.
+
+All contributions are welcome, whether they’re fixes for mistakes, improvements to existing scripts, or entirely new guides.
+
+## Contact
+
+    - Email: cycloarkane@gmail.com
+    - GitHub: @cycloarcane
+
+Feel free to reach out if you have any questions or ideas.
+
+## License
+
+This project is licensed under the MIT License. You’re free to copy, modify, and distribute the contents of this repository for any purpose, personal or commercial, provided that the terms of the MIT License are met.
