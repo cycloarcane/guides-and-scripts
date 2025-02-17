@@ -35,7 +35,7 @@ This guide covers:
 - Tips for ensuring secure remote access and mitigating potential vulnerabilities.
 - Possible tunneling and proxy strategies for circumventing restrictive networks.
 
-Use Cases:
+**Use Cases:**
 
 - Accessing files or running commands on a home server while you’re on the road.
 - Remotely administering a desktop or headless machine for quick tasks.
@@ -51,7 +51,7 @@ This guide covers:
 - Useful configuration tips and examples of prompt workflows.
 - Potential pitfalls and how to avoid them (e.g., GPU memory usage, dependency management).
 
-Use Cases:
+**Use Cases:**
 
 - Generating artistic images with minimal setup and overhead.
 - Rapid prototyping of AI-generated art without complicated manual installations.
@@ -66,33 +66,40 @@ Use Cases:
    git clone https://github.com/cycloarcane/useful-scripts.git
    ```
 
-    - Browse the Topics \n
-    Each script or guide is located in its own directory or file. Explore the repository to see what interests you.
+2. **Browse the Topics**  
+   Each script or guide is located in its own directory or file. Explore the repository to see what interests you.
 
-    - Adapt & Implement \n
-    Feel free to take these scripts and guides as-is or customize them for your specific use case.
+3. **Adapt & Implement**  
+   Feel free to take these scripts and guides as-is or customize them for your specific use case.
 
-    - Contribute \n
-    If you notice anything that can be improved, have a suggestion, or want to add your own script, please see the Contributing section below.
+4. **Contribute**  
+   If you notice anything that can be improved, have a suggestion, or want to add your own script, please see the [Contributing](#contributing) section below.
+
+---
 
 ## Contributing
 
-    - Fork the repository on GitHub.
-    - Clone your fork to your local machine.
-    - Create a new branch for your changes.
-    - Commit your changes with clear commit messages.
-    - Push your changes to your fork.
-    - Open a Pull Request on this repository with a description of what you’ve changed or added.
+1. Fork the repository on GitHub.
+2. Clone your fork to your local machine.
+3. Create a new branch for your changes.
+4. Commit your changes with clear commit messages.
+5. Push your changes to your fork.
+6. Open a Pull Request on this repository with a description of what you’ve changed or added.
 
 All contributions are welcome, whether they’re fixes for mistakes, improvements to existing scripts, or entirely new guides.
 
+---
+
 ## Contact
 
-    - Email: cycloarkane@gmail.com
-    - GitHub: @cycloarcane
+- **Email:** cycloarkane@gmail.com  
+- **GitHub:** [@cycloarcane](https://github.com/cycloarcane)
 
 Feel free to reach out if you have any questions or ideas.
+
+---
 
 ## License
 
 This project is licensed under the MIT License. You’re free to copy, modify, and distribute the contents of this repository for any purpose, personal or commercial, provided that the terms of the MIT License are met.
+
