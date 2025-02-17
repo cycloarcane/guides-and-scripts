@@ -66,13 +66,13 @@ Use Cases:
    git clone https://github.com/cycloarcane/useful-scripts.git
    ```
 
-    ### Browse the Topics
+    - Browse the Topics
     Each script or guide is located in its own directory or file. Explore the repository to see what interests you.
 
-    ### Adapt & Implement
+    - Adapt & Implement
     Feel free to take these scripts and guides as-is or customize them for your specific use case.
 
-    ### Contribute
+    - Contribute
     If you notice anything that can be improved, have a suggestion, or want to add your own script, please see the Contributing section below.
 
 ## Contributing
