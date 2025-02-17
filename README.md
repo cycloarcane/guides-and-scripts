@@ -64,6 +64,7 @@ Use Cases:
 1. **Clone the Repository**  
    ```bash
    git clone https://github.com/cycloarcane/useful-scripts.git
+   ```
 
     ### Browse the Topics
     Each script or guide is located in its own directory or file. Explore the repository to see what interests you.
