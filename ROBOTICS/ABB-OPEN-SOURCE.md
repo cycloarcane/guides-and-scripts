@@ -311,3 +311,12 @@ This guide sets you up with an open source development environment for simulatio
 *Always review the latest documentation for ROS-Industrial and your ABB packages as updates or package changes may occur.*
 
 Happy hacking!
+
+
+## Additional Notes
+
+- Similar to Anthropic multistage network attacks paper, use macros for LLM to call to execute commands to the robot through waiting API.
+- Strict controls and limits to prevent acctuator damage.
+- Set up a database with current locations and degrees of joints, plus historical movements.
+- Include vision information using VLLM transformer for decision making process augmentation, possibly use native MMLM.
+
