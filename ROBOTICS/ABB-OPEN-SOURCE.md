@@ -316,6 +316,8 @@ Happy hacking!
 ## Additional Notes
 
 - Similar to Anthropic multistage network attacks paper, use macros for LLM to call to execute commands to the robot through waiting API.
+- Minimise RobotStudio use,, try and get ROS working, probably melodic legacy.
+- First step of application should be calibration checks. 
 - Strict controls and limits to prevent acctuator damage.
 - Set up a database with current locations and degrees of joints, plus historical movements.
 - Include vision information using VLLM transformer for decision making process augmentation, possibly use native MMLM.
