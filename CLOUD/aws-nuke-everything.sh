@@ -2,65 +2,70 @@
 
 set -euo pipefail
 
+# Make sure jq is installed
+if ! command -v jq &> /dev/null; then
+  echo "❌ 'jq' is required. Install it first: sudo pacman -S jq"
+  exit 1
+fi
+
 regions=($(aws ec2 describe-regions --query "Regions[*].RegionName" --output text))
 
 for region in "${regions[@]}"; do
-  echo "🌍 REGION: $region"
+  echo -e "\n🌍 REGION: $region"
 
-  # Terminate EC2 Instances
+  ## 🔥 Terminate EC2 instances
   instances=$(aws ec2 describe-instances --region $region --query "Reservations[*].Instances[*].InstanceId" --output text)
   if [[ -n "$instances" ]]; then
     echo "🔥 Terminating instances: $instances"
     aws ec2 terminate-instances --instance-ids $instances --region $region
-  fi
-
-  # Delete Volumes
-  volumes=$(aws ec2 describe-volumes --region $region --query "Volumes[*].VolumeId" --output text)
-  if [[ -n "$volumes" ]]; then
-    echo "🧹 Deleting volumes: $volumes"
-    for vol in $volumes; do
-      aws ec2 delete-volume --volume-id $vol --region $region
-    done
-  fi
-
-  # Delete Snapshots (owned by you)
-  snapshots=$(aws ec2 describe-snapshots --owner-ids self --region $region --query "Snapshots[*].SnapshotId" --output text)
-  if [[ -n "$snapshots" ]]; then
-    echo "🧹 Deleting snapshots: $snapshots"
-    for snap in $snapshots; do
-      aws ec2 delete-snapshot --snapshot-id $snap --region $region
-    done
-  fi
-
-  # Release Elastic IPs
-  eips=$(aws ec2 describe-addresses --region $region --query "Addresses[*].AllocationId" --output text)
-  if [[ -n "$eips" ]]; then
-    echo "🌐 Releasing Elastic IPs: $eips"
-    for eip in $eips; do
-      aws ec2 release-address --allocation-id $eip --region $region
-    done
-  fi
-
-  # Delete *only* customer-managed Prefix Lists
-  echo "🔍 Checking for customer-managed prefix lists..."
-  prefix_lists=$(aws ec2 describe-managed-prefix-lists --region $region \
-    --query "PrefixLists[?OwnerId!='aws'].PrefixListId" --output text)
-
-  if [[ -n "$prefix_lists" ]]; then
-    for pl in $prefix_lists; do
-      echo "❌ Deleting customer-managed prefix list: $pl"
-      aws ec2 delete-managed-prefix-list --prefix-list-id "$pl" --region $region || true
-    done
   else
-    echo "ℹ️ No customer-managed prefix lists found in $region."
+    echo "✅ No EC2 instances found."
   fi
 
-  # Delete VPCs (and all their children)
+  ## 💽 Delete EBS volumes
+  volumes=$(aws ec2 describe-volumes --region $region --query "Volumes[*].VolumeId" --output text)
+  for vol in $volumes; do
+    echo "🧹 Deleting volume: $vol"
+    aws ec2 delete-volume --volume-id $vol --region $region || true
+  done
+
+  ## 🗂️ Delete snapshots (owned by you)
+  snapshots=$(aws ec2 describe-snapshots --owner-ids self --region $region --query "Snapshots[*].SnapshotId" --output text)
+  for snap in $snapshots; do
+    echo "🧼 Deleting snapshot: $snap"
+    aws ec2 delete-snapshot --snapshot-id $snap --region $region || true
+  done
+
+  ## 🌐 Release Elastic IPs
+  eips=$(aws ec2 describe-addresses --region $region --query "Addresses[*].AllocationId" --output text)
+  for eip in $eips; do
+    echo "🌐 Releasing Elastic IP: $eip"
+    aws ec2 release-address --allocation-id $eip --region $region || true
+  done
+
+  ## 🧠 Delete customer-managed prefix lists (skip AWS-managed)
+  echo "🔍 Checking prefix lists in $region..."
+  prefix_data=$(aws ec2 describe-managed-prefix-lists --region $region --output json)
+
+  echo "$prefix_data" | jq -c '.PrefixLists[]' | while read -r item; do
+    owner_id=$(echo "$item" | jq -r '.OwnerId')
+    prefix_list_id=$(echo "$item" | jq -r '.PrefixListId')
+    prefix_list_name=$(echo "$item" | jq -r '.PrefixListName')
+
+    if [[ "$owner_id" != "aws" && ! "$prefix_list_name" =~ ^com\.amazonaws\. ]]; then
+      echo "❌ Deleting customer-managed prefix list: $prefix_list_id"
+      aws ec2 delete-managed-prefix-list --prefix-list-id "$prefix_list_id" --region $region || true
+    else
+      echo "🔒 Skipping AWS-managed prefix list: $prefix_list_id ($prefix_list_name)"
+    fi
+  done
+
+  ## 💥 Delete all VPCs (takes out subnets, gateways, route tables, etc.)
   vpcs=$(aws ec2 describe-vpcs --region $region --query "Vpcs[*].VpcId" --output text)
   for vpc in $vpcs; do
-    echo "💥 Deleting VPC: $vpc"
+    echo "💣 Deleting VPC: $vpc"
     aws ec2 delete-vpc --vpc-id $vpc --region $region || true
   done
 done
 
-echo -e "\n✅ AWS account wiped clean (user-owned resources only)."
+echo -e "\n✅ AWS account is clean. Wiped user-owned resources across all regions."
