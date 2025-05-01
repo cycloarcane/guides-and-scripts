@@ -142,6 +142,8 @@ models:
     provider: ollama
     model: qwen2.5-coder:14b
     apiBase: http://127.0.0.1:11434
+    capabilities:
+      - tool_use
     roles:
       - chat
 
