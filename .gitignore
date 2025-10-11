@@ -1,0 +1,14 @@
+# Personal/private content
+MONEY/
+LOCAL-EVENTS/
+06-PROFESSIONAL-RESOURCES/career/
+06-PROFESSIONAL-RESOURCES/community/
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
