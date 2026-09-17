@@ -34,7 +34,7 @@ A comprehensive, curated collection of technical guides and scripts covering AI/
 - **[Networking](03-INFRASTRUCTURE/networking/)** — Remote SSH access, DDNS, port forwarding
 
 ### 🛠️ [System Administration](04-SYSTEM-ADMINISTRATION/)
-- **[Troubleshooting](04-SYSTEM-ADMINISTRATION/troubleshooting/)** — Hardware change recovery, NVIDIA VBIOS
+- **[Troubleshooting](04-SYSTEM-ADMINISTRATION/troubleshooting/)** — Hardware change recovery, NVIDIA VBIOS, TV-as-monitor dropouts
 - **[File Recovery](04-SYSTEM-ADMINISTRATION/file-recovery/)** — Windows NVMe recovery from Linux
 - **[Hardware](04-SYSTEM-ADMINISTRATION/hardware/)** — HP Reverb G2 VR on Arch Linux
 
@@ -67,7 +67,7 @@ guides-and-scripts/
 │   └── networking/                  # SSH remote access, DDNS
 │
 ├── 04-SYSTEM-ADMINISTRATION/
-│   ├── troubleshooting/             # Hardware recovery, NVIDIA VBIOS
+│   ├── troubleshooting/             # Hardware recovery, NVIDIA VBIOS, display dropouts
 │   ├── file-recovery/               # Windows NVMe recovery
 │   └── hardware/                    # VR headset setup
 │
